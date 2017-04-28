@@ -17,8 +17,8 @@ public class BookJSONDecoder {
             Book book = new Book(obj.getInt("id"),
                     obj.getString("title"),
                     obj.getDouble("price"),
-                    obj.getInt("pub_year"));
-            book.setImageUrl(obj.getString("img_url"));
+                    obj.getInt("pub_year"),
+                    obj.getString("img_url"));
             return book;
         } catch (JSONException ex) {
             return null;

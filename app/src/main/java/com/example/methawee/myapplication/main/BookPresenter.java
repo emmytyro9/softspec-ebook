@@ -18,7 +18,7 @@ public class BookPresenter implements Observer {
 
     ArrayList<Book> books;
 
-    public BookPresenter(BookRepository repository, BookView view) {
+    public BookPresenter(BookView view, BookRepository repository) {
         this.repository = repository;
         this.view = view;
         initialize();

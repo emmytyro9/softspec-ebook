@@ -18,15 +18,16 @@ public class RemoteBookRepository extends BookRepository {
 
     private List<Book> books;
 
-    private static RemoteBookRepository instance = null;
+    private static RemoteBookRepository instance;
 
     private RemoteBookRepository() {
         books = new ArrayList<Book>();
     }
 
     public static RemoteBookRepository getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new RemoteBookRepository();
+        }
         return instance;
     }
 

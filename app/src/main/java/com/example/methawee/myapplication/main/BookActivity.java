@@ -23,7 +23,8 @@ public class BookActivity extends AppCompatActivity implements BookView {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
         bookRepository = RemoteBookRepository.getInstance();
-        bookPresenter = new BookPresenter(bookRepository, this);
+        bookPresenter = new BookPresenter(this, bookRepository);
+
     }
 
 
