@@ -21,10 +21,10 @@ public class MockBookRepository extends BookRepository {
 
     private MockBookRepository() {
         books = new ArrayList<Book>();
-        books.add(new Book(1, "Introduction to Java", 13.95, 2015, ""));
-        books.add(new Book(10, "Introduction to C++", 19.95, 2016, ""));
-        books.add(new Book(12, "Algorithms", 29.95, 2012, ""));
-        books.add(new Book(17, "Pascal Programming", 17.95, 2007, ""));
+        books.add(new Book(1, "Introduction to Java", 13.95, 2015, "https://images-na.ssl-images-amazon.com/images/I/41xvbZoHAzL._SX397_BO1,204,203,200_.jpg"));
+        books.add(new Book(10, "Introduction to C++", 19.95, 2016, "https://images-na.ssl-images-amazon.com/images/I/51iQ0T3KTTL._SX258_BO1,204,203,200_.jpg"));
+        books.add(new Book(12, "Algorithms", 29.95, 2012, "https://upload.wikimedia.org/wikipedia/en/4/41/Clrs3.jpeg"));
+        books.add(new Book(17, "Pascal Programming", 17.95, 2007, "https://images-na.ssl-images-amazon.com/images/I/51c6iRdHd0L._SX399_BO1,204,203,200_.jpg"));
     }
 
     @Override
