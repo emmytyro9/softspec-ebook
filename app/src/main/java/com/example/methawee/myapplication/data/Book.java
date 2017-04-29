@@ -44,6 +44,6 @@ public class Book {
     public String getImageUrl() { return imageUrl; }
 
     public String toString() {
-        return title + " (" + price + ")";
+        return id + ", " + title + " ($" + price + ")";
     }
 }
