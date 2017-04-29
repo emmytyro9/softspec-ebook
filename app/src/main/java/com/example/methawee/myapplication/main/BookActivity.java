@@ -29,13 +29,10 @@ public class BookActivity extends AppCompatActivity implements BookView {
 
 
     public void setBookList(List books) {
-
         bookView = (ListView) findViewById(R.id.listview_books);
         ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(this, android.R.layout.simple_list_item_1, books);
         bookView.setAdapter(adapter);
     }
-
-
 
 }
 

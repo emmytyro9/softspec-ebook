@@ -37,7 +37,7 @@ public class Book {
         return price;
     }
 
-    public int getPublicationYear() {
+    public int getYear() {
         return year;
     }
 

@@ -3,11 +3,14 @@ package com.example.methawee.myapplication.data;
 import android.os.AsyncTask;
 
 import com.example.methawee.myapplication.data.decoders.BookJSONDecoder;
+import com.example.methawee.myapplication.main.BookView;
 import com.example.methawee.myapplication.utils.UrlFetcher;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -42,7 +45,8 @@ public class RemoteBookRepository extends BookRepository {
         return books;
     }
 
-    public class BookFetcherTask extends AsyncTask<Void,Void,ArrayList<Book>> {
+
+    public class BookFetcherTask extends AsyncTask<Void, Void, ArrayList<Book>> {
         @Override
         protected ArrayList<Book> doInBackground(Void... params) {
             String bookListJsonStr = loadJSON();
@@ -73,5 +77,4 @@ public class RemoteBookRepository extends BookRepository {
             }
         }
     }
-
 }

@@ -1,6 +1,5 @@
 package com.example.methawee.myapplication.data;
 
-
 import java.util.List;
 import java.util.Observable;
 
