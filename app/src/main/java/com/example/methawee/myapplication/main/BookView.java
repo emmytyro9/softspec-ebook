@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface BookView {
 
-    void setBookList(List books);
+    void setBookList(ArrayList<Book> books);
 }
