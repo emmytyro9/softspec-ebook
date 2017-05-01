@@ -6,6 +6,8 @@ import com.example.methawee.myapplication.data.BookRepository;
 import com.example.methawee.myapplication.data.Book;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -35,6 +37,14 @@ public class BookPresenter implements Observer {
     public void update(Observable obj, Object arg) {
         if(obj == repository) {
             books = new ArrayList<Book>(repository.getAllBooks());
+            Collections.sort(books, new Comparator<Book>() {
+                        @Override
+                        public int compare(final Book object1, final Book object2) {
+                            return object1.getTitle().compareTo(object2.getTitle());
+                        }
+                    }
+            );
+
             view.setBookList(books);
         }
     }
