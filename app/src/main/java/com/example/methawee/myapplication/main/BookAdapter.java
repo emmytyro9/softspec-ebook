@@ -1,4 +1,4 @@
-package com.example.methawee.myapplication.data;
+package com.example.methawee.myapplication.main;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.methawee.myapplication.R;
+import com.example.methawee.myapplication.data.Book;
 import com.example.methawee.myapplication.main.BookView;
 import com.squareup.picasso.Picasso;
 

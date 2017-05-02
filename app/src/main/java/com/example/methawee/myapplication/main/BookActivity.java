@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 import com.example.methawee.myapplication.R;
 import com.example.methawee.myapplication.data.Book;
-import com.example.methawee.myapplication.data.BookAdapter;
 import com.example.methawee.myapplication.data.BookRepository;
 import com.example.methawee.myapplication.data.RemoteBookRepository;
 
