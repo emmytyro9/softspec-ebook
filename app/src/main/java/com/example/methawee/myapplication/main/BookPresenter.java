@@ -36,13 +36,7 @@ public class BookPresenter implements Observer {
     public void update(Observable obj, Object arg) {
         if(obj == repository) {
             books = new ArrayList<Book>(repository.getAllBooks());
-            Collections.sort(books, new Comparator<Book>() {
-                        @Override
-                        public int compare(final Book book_1, final Book book_2) {
-                            return book_1.getTitle().compareTo(book_2.getTitle());
-                        }
-                    }
-            );
+            view.sort(books);
             view.setBookList(books);
         }
     }

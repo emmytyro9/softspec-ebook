@@ -51,7 +51,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
         }
 
         viewHolder.title.setText(book.getTitle());
-        viewHolder.price.setText("$" + (Double.toString(book.getPrice())));
+        viewHolder.price.setText("$" + (Double.toString(book.getPrice())) + " - " + (Integer.toString(book.getYear())));
         Picasso.with(getContext()).load(Uri.parse(book.getImageUrl())).error(R.drawable.ic_nocover).into(viewHolder.img);
         return convertView;
     }
