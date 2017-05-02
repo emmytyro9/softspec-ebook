@@ -18,7 +18,6 @@ import com.example.methawee.myapplication.data.BookRepository;
 import com.example.methawee.myapplication.data.RemoteBookRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BookActivity extends AppCompatActivity implements BookView {
 
@@ -59,12 +58,16 @@ public class BookActivity extends AppCompatActivity implements BookView {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
                 ArrayList<Book> found_book = new ArrayList<Book>();
                 ArrayList<Book> books = new ArrayList<Book>(book_repository.getAllBooks());
                 book_view = (ListView) findViewById(R.id.listview_books);
+
                 if (newText != null && !newText.isEmpty()) {
                     for (Book book : books) {
-                        if (book.getTitle().contains(newText) || book.getYear() == (Integer.valueOf(newText))) {
+                        /* with case sensitive: book.getTitle().equalsIgnoreCase(newText); */
+                        if (book.getTitle().contains(newText) ||
+                                book.getYear() == (Integer.valueOf(newText))) {
                             found_book.add(book);
                         }
                     }
