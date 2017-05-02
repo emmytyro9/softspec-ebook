@@ -62,9 +62,9 @@ public class BookActivity extends AppCompatActivity implements BookView {
                     for (Book book : books) {
                         if (book.getTitle().contains(newText)) {
                             found_book.add(book);
-                        }  if (Integer.valueOf(newText) == book.getYear()) {
+                        } /* if (Integer.valueOf(newText) == book.getYear()) {
                             found_book.add(book);
-                        }
+                        } */
                     }
                     sort(found_book);
                     book_adapter = new BookAdapter(BookActivity.this, found_book);
