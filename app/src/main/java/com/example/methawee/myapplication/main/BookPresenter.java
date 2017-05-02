@@ -1,6 +1,5 @@
 package com.example.methawee.myapplication.main;
 
-import android.widget.ListView;
 
 import com.example.methawee.myapplication.data.BookRepository;
 import com.example.methawee.myapplication.data.Book;
@@ -39,12 +38,11 @@ public class BookPresenter implements Observer {
             books = new ArrayList<Book>(repository.getAllBooks());
             Collections.sort(books, new Comparator<Book>() {
                         @Override
-                        public int compare(final Book object1, final Book object2) {
-                            return object1.getTitle().compareTo(object2.getTitle());
+                        public int compare(final Book book_1, final Book book_2) {
+                            return book_1.getTitle().compareTo(book_2.getTitle());
                         }
                     }
             );
-
             view.setBookList(books);
         }
     }
