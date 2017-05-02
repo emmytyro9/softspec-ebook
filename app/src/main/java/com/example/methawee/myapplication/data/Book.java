@@ -2,6 +2,7 @@ package com.example.methawee.myapplication.data;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.Comparator;
 
@@ -9,8 +10,7 @@ import java.util.Comparator;
  * Created by methawee on 4/20/2017 AD.
  */
 
-public class Book implements Comparable {
-
+public class Book implements Comparable, Serializable {
     private int id;
     private String title;
     private double price;

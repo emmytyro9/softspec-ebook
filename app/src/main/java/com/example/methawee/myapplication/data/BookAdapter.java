@@ -13,6 +13,7 @@ import com.example.methawee.myapplication.R;
 import com.example.methawee.myapplication.main.BookView;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
