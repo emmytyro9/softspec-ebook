@@ -37,4 +37,14 @@ public class MockBookRepository extends BookRepository {
     public List<Book> getAllBooks() {
         return books;
     }
+
+    @Override
+    public void sort(ArrayList<Book> books) {
+
+    }
+
+    @Override
+    public ArrayList<Book> search(String newText) {
+        return null;
+    }
 }

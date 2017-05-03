@@ -12,5 +12,4 @@ import java.util.List;
 public interface BookView {
 
     void setBookList(ArrayList<Book> books);
-    void sort(ArrayList<Book> books);
 }

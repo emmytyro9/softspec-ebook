@@ -1,8 +1,12 @@
 package com.example.methawee.myapplication.data;
 
 import android.os.AsyncTask;
+import android.widget.ListView;
 
+import com.example.methawee.myapplication.R;
 import com.example.methawee.myapplication.data.decoders.BookJSONDecoder;
+import com.example.methawee.myapplication.main.BookActivity;
+import com.example.methawee.myapplication.main.BookAdapter;
 import com.example.methawee.myapplication.main.BookView;
 import com.example.methawee.myapplication.utils.UrlFetcher;
 
@@ -19,7 +23,8 @@ import java.util.List;
 
 public class RemoteBookRepository extends BookRepository {
 
-    private List<Book> books;
+    private ArrayList<Book> books;
+    private BookAdapter book_adapter;
 
     private static RemoteBookRepository instance;
 
@@ -43,6 +48,37 @@ public class RemoteBookRepository extends BookRepository {
     @Override
     public List<Book> getAllBooks() {
         return books;
+    }
+
+    @Override
+    public void sort(ArrayList<Book> books) {
+        Collections.sort(books, new Comparator<Book>() {
+                    @Override
+                    public int compare(final Book book_1, final Book book_2) {
+                        return book_1.getTitle().compareTo(book_2.getTitle());
+                    }
+                }
+        );
+    }
+
+    @Override
+    public ArrayList<Book> search(String newText) {
+        ArrayList<Book> found_book = new ArrayList<Book>();
+        if (newText != null && !newText.isEmpty()) {
+            for (Book book : books) {
+                if (book.getTitle().contains(newText)) {
+                    found_book.add(book);
+                }  /* else if (Integer.valueOf(newText) == book.getYear()) {
+                          found_book.add(book);
+                        } */
+            }
+            sort(found_book);
+            return found_book;
+        } else {
+            ArrayList<Book> book = books;
+            sort(book);
+            return book;
+        }
     }
 
 

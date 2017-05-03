@@ -30,6 +30,7 @@ public class BookDetailActivity extends AppCompatActivity {
         year = (TextView) findViewById(R.id.year);
 
         Book book = (Book) getIntent().getSerializableExtra("book");
+        loadBook(book);
 
     }
 
