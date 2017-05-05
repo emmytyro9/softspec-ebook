@@ -47,4 +47,9 @@ public class MockBookRepository extends BookRepository {
     public ArrayList<Book> search(String newText) {
         return null;
     }
+
+    @Override
+    public Book getBookAt(int index) {
+        return null;
+    }
 }

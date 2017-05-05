@@ -1,13 +1,9 @@
 package com.example.methawee.myapplication.data;
 
 import android.os.AsyncTask;
-import android.widget.ListView;
 
-import com.example.methawee.myapplication.R;
 import com.example.methawee.myapplication.data.decoders.BookJSONDecoder;
-import com.example.methawee.myapplication.main.BookActivity;
 import com.example.methawee.myapplication.main.BookAdapter;
-import com.example.methawee.myapplication.main.BookView;
 import com.example.methawee.myapplication.utils.UrlFetcher;
 
 import java.net.MalformedURLException;
@@ -79,6 +75,11 @@ public class RemoteBookRepository extends BookRepository {
             sort(book);
             return book;
         }
+    }
+
+    @Override
+    public Book getBookAt(int index) {
+        return books.get(index);
     }
 
 

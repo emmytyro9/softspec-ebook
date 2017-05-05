@@ -1,13 +1,17 @@
 package com.example.methawee.myapplication.main;
 
 
+import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 
@@ -15,10 +19,9 @@ import com.example.methawee.myapplication.R;
 import com.example.methawee.myapplication.data.Book;
 import com.example.methawee.myapplication.data.BookRepository;
 import com.example.methawee.myapplication.data.RemoteBookRepository;
+import com.example.methawee.myapplication.main.book_detail.BookDetailActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class BookActivity extends AppCompatActivity implements BookView {
 
@@ -34,6 +37,18 @@ public class BookActivity extends AppCompatActivity implements BookView {
         book_repository = RemoteBookRepository.getInstance();
         book_presenter = new BookPresenter(this, book_repository);
     }
+
+    public void setupBookSelectedListener() {
+        book_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(BookActivity.this, BookDetailActivity.class);
+                intent.putExtra("book", book_repository.getBookAt(position - 1));
+                startActivity(intent);
+            }
+        });
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,6 +81,8 @@ public class BookActivity extends AppCompatActivity implements BookView {
         book_adapter = new BookAdapter(this, books);
         book_view.setAdapter(book_adapter);
     }
+
+
 }
 
 
