@@ -42,4 +42,6 @@ public class BookPresenter implements Observer {
     public void search(String newText) {
         view.setBookList(repository.search(newText));
     }
+
+
 }

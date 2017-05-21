@@ -1,8 +1,10 @@
 package com.example.methawee.myapplication.main;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -19,6 +21,8 @@ import com.example.methawee.myapplication.R;
 import com.example.methawee.myapplication.data.Book;
 import com.example.methawee.myapplication.data.BookRepository;
 import com.example.methawee.myapplication.data.RemoteBookRepository;
+import com.example.methawee.myapplication.data.cart.Cart;
+import com.example.methawee.myapplication.data.cart.User;
 import com.example.methawee.myapplication.main.book_detail.BookDetailActivity;
 
 import java.util.ArrayList;
@@ -80,6 +84,23 @@ public class BookActivity extends AppCompatActivity implements BookView {
         book_view = (ListView) findViewById(R.id.listview_books);
         book_adapter = new BookAdapter(this, books);
         book_view.setAdapter(book_adapter);
+    }
+
+    public void cart(View view) {
+        final Cart cart = book_presenter.getCart();
+        final User user = book_presenter.getUser();
+        final ListView cart_list = new ListView(this);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Cart ♡")
+                .setView(cart_list)
+                .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 
 
