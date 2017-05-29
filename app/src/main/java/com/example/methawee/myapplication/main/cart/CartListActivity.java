@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.methawee.myapplication.data.Book;
-import com.example.methawee.myapplication.main.BookAdapter;
+import com.example.methawee.myapplication.main.book.BookAdapter;
 
 import java.util.ArrayList;
 

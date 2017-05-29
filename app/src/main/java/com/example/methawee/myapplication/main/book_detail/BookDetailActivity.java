@@ -4,17 +4,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
-import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.methawee.myapplication.R;
 import com.example.methawee.myapplication.data.Book;
 import com.example.methawee.myapplication.data.BookRepository;
-import com.example.methawee.myapplication.data.RemoteBookRepository;
-import com.example.methawee.myapplication.main.BookPresenter;
+import com.example.methawee.myapplication.main.book.BookPresenter;
 import com.squareup.picasso.Picasso;
 
 /**
