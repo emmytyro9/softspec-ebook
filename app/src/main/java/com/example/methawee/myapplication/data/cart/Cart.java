@@ -25,8 +25,15 @@ public class Cart implements Serializable {
     }
 
     public void remove(Book book) {
-
-
+        int index = -100;
+        for (int i = 0; i < cart.size(); i++) {
+            if (cart.get(i).getId() == book.getId()) {
+                index = i;
+            }
+        }
+        if (index >= 0) {
+            cart.remove(index);
+        }
     }
 
     public void clear() {

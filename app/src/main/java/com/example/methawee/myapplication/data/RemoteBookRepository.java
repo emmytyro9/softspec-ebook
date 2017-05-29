@@ -3,7 +3,7 @@ package com.example.methawee.myapplication.data;
 import android.os.AsyncTask;
 
 import com.example.methawee.myapplication.data.decoders.BookJSONDecoder;
-import com.example.methawee.myapplication.main.BookAdapter;
+import com.example.methawee.myapplication.main.book.BookAdapter;
 import com.example.methawee.myapplication.utils.UrlFetcher;
 
 import java.net.MalformedURLException;
@@ -62,11 +62,8 @@ public class RemoteBookRepository extends BookRepository {
         ArrayList<Book> found_book = new ArrayList<Book>();
         if (newText != null && !newText.isEmpty()) {
             for (Book book : books) {
-                if (book.getTitle().contains(newText)) {
+                if (book.getTitle().contains(newText) || newText.equals(Integer.toString(book.getYear())))
                     found_book.add(book);
-                }  /* else if (Integer.valueOf(newText) == book.getYear()) {
-                          found_book.add(book);
-                        } */
             }
             sort(found_book);
             return found_book;
@@ -76,6 +73,8 @@ public class RemoteBookRepository extends BookRepository {
             return book;
         }
     }
+
+
 
     @Override
     public Book getBookAt(int index) {
