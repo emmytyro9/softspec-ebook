@@ -39,23 +39,19 @@ public class BookActivity extends AppCompatActivity implements BookView {
     private ListView book_view;
     private BookPresenter book_presenter;
     private BookRepository book_repository;
-    private BookAdapter book_adapter;
-    ArrayAdapter<Book> bookAdapter;
+    ArrayAdapter<Book> book_adapter;
     public static Cart user = new Cart();
-
-    Button cart ;
+    Button cart;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        book_view = (ListView) findViewById(R.id.listview_books) ;
+        book_view = (ListView) findViewById(R.id.listview_books);
         book_repository = RemoteBookRepository.getInstance();
-        bookAdapter =  createAdapter(new ArrayList<Book>());
+        book_adapter = create_adapter(new ArrayList<Book>());
         book_presenter = new BookPresenter(this, book_repository);
-        book_view.setAdapter(bookAdapter);
+        book_view.setAdapter(book_adapter);
         cart = (Button) findViewById(R.id.button_cart);
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,9 +62,9 @@ public class BookActivity extends AppCompatActivity implements BookView {
         });
     }
 
-    private ArrayAdapter<Book> createAdapter(ArrayList<Book> books){
+    private ArrayAdapter<Book> create_adapter(ArrayList<Book> books) {
 
-        return new ArrayAdapter<Book>(this,android.R.layout.simple_list_item_1,books);
+        return new BookAdapter(this, books);
     }
 
     @Override
@@ -89,6 +85,7 @@ public class BookActivity extends AppCompatActivity implements BookView {
                         search_view.clearFocus();
                         return true;
                     }
+
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         book_presenter.search(newText);
@@ -103,37 +100,33 @@ public class BookActivity extends AppCompatActivity implements BookView {
     }
 
     public void setBookList(ArrayList<Book> books) {
-        bookAdapter = createAdapter(books);
-        book_view.setAdapter(bookAdapter);
+        book_adapter = create_adapter(books);
+        book_view.setAdapter(book_adapter);
         book_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(BookActivity.this);
                 alertDialog.setTitle("Confirmation");
-                alertDialog.setMessage("Add to cart?");
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                alertDialog.setMessage("Add to cart ?");
+                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),"Book is added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Book is added", Toast.LENGTH_SHORT).show();
                         cartArrayList.add((Book) book_view.getItemAtPosition(position));
 
                     }
                 });
 
-                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener(){
+                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),"Cancel", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Cancel", Toast.LENGTH_SHORT).show();
                     }
                 });
-
                 alertDialog.show();
             }
-
         });
     }
 }
-
-
