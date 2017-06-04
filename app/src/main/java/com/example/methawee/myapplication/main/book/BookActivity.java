@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,10 +23,7 @@ import com.example.methawee.myapplication.data.Book;
 import com.example.methawee.myapplication.data.BookRepository;
 import com.example.methawee.myapplication.data.RemoteBookRepository;
 import com.example.methawee.myapplication.data.cart.Cart;
-import com.example.methawee.myapplication.data.cart.User;
-import com.example.methawee.myapplication.main.book_detail.BookDetailActivity;
 import com.example.methawee.myapplication.main.cart.CartActivity;
-import com.example.methawee.myapplication.main.user.UserActivity;
 
 import java.util.ArrayList;
 
@@ -41,17 +37,15 @@ public class BookActivity extends AppCompatActivity implements BookView {
     private BookRepository book_repository;
     ArrayAdapter<Book> book_adapter;
     public static Cart user = new Cart();
-    Button cart;
+    Button cart, sort_title, sort_year;
+    public static int type;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
-        book_view = (ListView) findViewById(R.id.listview_books);
         book_repository = RemoteBookRepository.getInstance();
-        book_adapter = create_adapter(new ArrayList<Book>());
         book_presenter = new BookPresenter(this, book_repository);
-        book_view.setAdapter(book_adapter);
         cart = (Button) findViewById(R.id.button_cart);
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +54,31 @@ public class BookActivity extends AppCompatActivity implements BookView {
                 startActivity(i);
             }
         });
+        sort_title = (Button) findViewById(R.id.sort_title);
+        sort_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                type = 1;
+                book_presenter.sort(type);
+                book_presenter.update(book_repository, book_view);
+            }
+        });
+        sort_year = (Button) findViewById(R.id.sort_year);
+        sort_year.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                type = 2;
+                book_presenter.sort(type);
+                book_presenter.update(book_repository, book_view);
+            }
+        });
     }
 
     private ArrayAdapter<Book> create_adapter(ArrayList<Book> books) {
 
         return new BookAdapter(this, books);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,6 +113,7 @@ public class BookActivity extends AppCompatActivity implements BookView {
     }
 
     public void setBookList(ArrayList<Book> books) {
+        book_view = (ListView) findViewById(R.id.listview_books);
         book_adapter = create_adapter(books);
         book_view.setAdapter(book_adapter);
         book_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {

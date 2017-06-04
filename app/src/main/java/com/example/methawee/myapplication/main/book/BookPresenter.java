@@ -3,8 +3,6 @@ package com.example.methawee.myapplication.main.book;
 
 import com.example.methawee.myapplication.data.BookRepository;
 import com.example.methawee.myapplication.data.Book;
-import com.example.methawee.myapplication.data.cart.Cart;
-import com.example.methawee.myapplication.data.cart.User;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -16,8 +14,6 @@ import java.util.Observer;
 
 public class BookPresenter implements Observer {
 
-    private User user;
-    private Cart cart;
     private BookView view;
     private BookRepository repository;
 
@@ -38,13 +34,21 @@ public class BookPresenter implements Observer {
     public void update(Observable obj, Object arg) {
         if (obj == repository) {
             books = new ArrayList<Book>(repository.getAllBooks());
-            repository.sort(books);
+            sort(BookActivity.type);
             view.setBookList(books);
         }
     }
 
     public void search(String newText) {
         view.setBookList(repository.search(newText));
+    }
+
+    public void sort(int type) {
+        if (type == 1)
+        repository.sort_title(books);
+        else {
+            repository.sort_year(books);
+        }
     }
 
 }

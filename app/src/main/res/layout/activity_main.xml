@@ -41,5 +41,32 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/button_cart"
             android:layout_marginBottom="17dp"></ListView>
+
+        <Button
+            android:id="@+id/sort_title"
+            android:layout_width="110dp"
+            android:layout_height="25dp"
+            android:text="SORT BY TITLE"
+            android:background="#a5ddd2"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_alignBaseline="@+id/button_cart"
+            android:layout_alignBottom="@+id/button_cart"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="13dp" />
+
+        <Button
+            android:id="@+id/sort_year"
+            android:layout_width="110dp"
+            android:layout_height="25dp"
+            android:text="SORT BY YEAR"
+            android:background="#a5ddd2"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_alignBaseline="@+id/button_cart"
+            android:layout_alignBottom="@+id/button_cart"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

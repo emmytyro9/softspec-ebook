@@ -39,7 +39,12 @@ public class MockBookRepository extends BookRepository {
     }
 
     @Override
-    public void sort(ArrayList<Book> books) {
+    public void sort_title(ArrayList<Book> books) {
+
+    }
+
+    @Override
+    public void sort_year(ArrayList<Book> books) {
 
     }
 

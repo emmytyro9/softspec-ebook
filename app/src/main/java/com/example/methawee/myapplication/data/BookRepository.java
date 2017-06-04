@@ -15,7 +15,9 @@ public abstract class BookRepository extends Observable {
 
     public abstract List<Book> getAllBooks();
 
-    public abstract void sort(ArrayList<Book> books);
+    public abstract void sort_title(ArrayList<Book> books);
+
+    public abstract void sort_year(ArrayList<Book> books);
 
     public abstract ArrayList<Book> search(String newText);
 

@@ -47,7 +47,7 @@ public class RemoteBookRepository extends BookRepository {
     }
 
     @Override
-    public void sort(ArrayList<Book> books) {
+    public void sort_title(ArrayList<Book> books) {
         Collections.sort(books, new Comparator<Book>() {
                     @Override
                     public int compare(final Book book_1, final Book book_2) {
@@ -58,6 +58,19 @@ public class RemoteBookRepository extends BookRepository {
     }
 
     @Override
+    public void sort_year(ArrayList<Book> books) {
+        Collections.sort(books, new Comparator<Book>() {
+                    @Override
+                    public int compare(final Book book_1, final Book book_2) {
+                        return Integer.toString(book_1.getYear()).compareTo(Integer.toString(book_2.getYear()));
+                    }
+                }
+        );
+    }
+
+
+
+    @Override
     public ArrayList<Book> search(String newText) {
         ArrayList<Book> found_book = new ArrayList<Book>();
         if (newText != null && !newText.isEmpty()) {
@@ -65,11 +78,11 @@ public class RemoteBookRepository extends BookRepository {
                 if (book.getTitle().contains(newText) || newText.equals(Integer.toString(book.getYear())))
                     found_book.add(book);
             }
-            sort(found_book);
+            sort_title(found_book);
             return found_book;
         } else {
             ArrayList<Book> book = books;
-            sort(book);
+            sort_title(book);
             return book;
         }
     }
