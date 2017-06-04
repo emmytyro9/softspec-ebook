@@ -13,7 +13,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.example.methawee.myapplication.R;
@@ -23,34 +26,49 @@ import com.example.methawee.myapplication.data.RemoteBookRepository;
 import com.example.methawee.myapplication.data.cart.Cart;
 import com.example.methawee.myapplication.data.cart.User;
 import com.example.methawee.myapplication.main.book_detail.BookDetailActivity;
+import com.example.methawee.myapplication.main.cart.CartActivity;
 import com.example.methawee.myapplication.main.user.UserActivity;
 
 import java.util.ArrayList;
 
 public class BookActivity extends AppCompatActivity implements BookView {
 
+
+    public static ArrayList<Book> cartArrayList = new ArrayList<Book>();
+
     private ListView book_view;
     private BookPresenter book_presenter;
     private BookRepository book_repository;
     private BookAdapter book_adapter;
+    ArrayAdapter<Book> bookAdapter;
+    public static Cart user = new Cart();
+
+    Button cart ;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
-        book_repository = RemoteBookRepository.getInstance();
-        book_presenter = new BookPresenter(this, book_repository);
-    }
 
-    public void setupBookSelectedListener() {
-        book_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        book_view = (ListView) findViewById(R.id.listview_books) ;
+        book_repository = RemoteBookRepository.getInstance();
+        bookAdapter =  createAdapter(new ArrayList<Book>());
+        book_presenter = new BookPresenter(this, book_repository);
+        book_view.setAdapter(bookAdapter);
+        cart = (Button) findViewById(R.id.button_cart);
+        cart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(BookActivity.this, BookDetailActivity.class);
-                intent.putExtra("book", book_repository.getBookAt(position - 1));
-                startActivity(intent);
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(i);
             }
         });
+    }
+
+    private ArrayAdapter<Book> createAdapter(ArrayList<Book> books){
+
+        return new ArrayAdapter<Book>(this,android.R.layout.simple_list_item_1,books);
     }
 
     @Override
@@ -85,40 +103,37 @@ public class BookActivity extends AppCompatActivity implements BookView {
     }
 
     public void setBookList(ArrayList<Book> books) {
-        book_view = (ListView) findViewById(R.id.listview_books);
-        book_adapter = new BookAdapter(this, books);
-        book_view.setAdapter(book_adapter);
-    }
+        bookAdapter = createAdapter(books);
+        book_view.setAdapter(bookAdapter);
+        book_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-    @Override
-    public void setConcurrency(int concurrency) {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(BookActivity.this);
+                alertDialog.setTitle("Confirmation");
+                alertDialog.setMessage("Add to cart?");
+                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 
-    }
-
-    public void user(View view) {
-        Intent intent = new Intent(BookActivity.this, UserActivity.class);
-        /* intent.putExtra("user", book_presenter.getUser()); */
-        BookActivity.this.startActivity(intent);
-    }
-
-    public void show_cart(View view) {
-        /* final Cart cart = book_presenter.getCart();
-        final User user = book_presenter.getUser(); */
-        final ListView cart_list = new ListView(this);
-
-        new AlertDialog.Builder(this)
-                .setTitle("Cart ♡")
-                .setView(cart_list)
-                .setPositiveButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"Book is added", Toast.LENGTH_SHORT).show();
+                        cartArrayList.add((Book) book_view.getItemAtPosition(position));
 
                     }
-                })
-                .show();
+                });
+
+                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"Cancel", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.show();
+            }
+
+        });
     }
-
-
 }
 
 

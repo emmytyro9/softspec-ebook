@@ -11,5 +11,5 @@ import java.util.ArrayList;
 public interface BookView {
 
     void setBookList(ArrayList<Book> books);
-    void setConcurrency(int concurrency);
+
 }
